@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    internal class Program
+    {
+       static void Main(string[] args)
+        {
+            Line line = new Line();
+            (double x1, double y1) point1 = (0, 0);
+            (double x2, double y2) point2 = (0, 0);
+            (double x12, double y12) newpoint1 = (0, 0);
+            (double x22, double y22) newpoint2 = (0, 0);
+            Console.WriteLine("Введите координаты первой точки:");
+            Console.WriteLine($"Координаты (x1):");
+            point1.x1 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine($"Координаты (x2):");
+            point1.y1 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine();
+
+            Console.WriteLine("Введите координаты второй точки:");
+            Console.WriteLine($"Координаты (x2):");
+            point2.x2 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine($"Координаты (y2):");
+            point2.y2 = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine("Координаты первой точки: ({0},{1})", point1.x1, point1.y1);
+            Console.WriteLine("Координаты второй точки: ({0},{1})", point2.x2, point2.y2);
+            double L = Math.Sqrt(Math.Pow(point2.x2 - point1.x1, 2)+Math.Pow(point2.y2-point1.y1,2));
+            Console.WriteLine("Длина отрезка: {0}", L);
+            Console.ReadKey();
+            Console.WriteLine("Какую из точек вы хотите сменить?(1, 2)");
+            double choice = Convert.ToDouble(Console.ReadLine());
+            if (choice == 1)
+            {
+                Console.WriteLine("Введите новые координаты точки 1:");
+                Console.WriteLine($"Координаты (x1):");
+                newpoint1.x12 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine($"Координаты (y1):");
+                newpoint1.y12 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
+                double ф = Math.Atan((newpoint1.y12 - point2.y2) / (newpoint1.x12 - point2.x2));
+                newpoint2.x22 = L * Math.Cos(ф) + newpoint1.x12;
+                newpoint2.y22 = L * Math.Sin(ф) + newpoint1.y12;
+                Console.WriteLine("Новые координаты первой точки: ({0}, {1})", newpoint1.x12, newpoint1.y12);
+                Console.WriteLine("Новые координаты второй точки: ({0}, {1})", newpoint2.x22, newpoint2.y22);
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("Введите новые координаты точки 2:");
+                Console.WriteLine($"Координаты (x2):");
+                newpoint2.x22 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine($"Координаты (y2):");
+                newpoint2.y22 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
+                double ф = Math.Atan((newpoint2.y22 - point1.y1) / (newpoint2.x22 - point1.x1));
+                newpoint1.x12 = L * Math.Cos(ф) + newpoint2.x22;
+                newpoint1.y12 = L * Math.Sin(ф) + newpoint2.y22;
+                Console.WriteLine("Новые координаты первой точки: ({0}, {1})", newpoint1.x12, newpoint1.y12);
+                Console.WriteLine("Новые координаты второй точки: ({0}, {1})", newpoint2.x22, newpoint2.y22);
+                Console.ReadKey();
+            }
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    internal class Line
+    {
+        public (int x1, int y1) Point1 { get; set; }
+        public (int x2, int y2) Point2 { get; set; }
+        public (int x12, int y12) Newpoint1 { get; set; }
+        public (int x22, int y22) Newpoint2 { get; set; }
+    }
+}
